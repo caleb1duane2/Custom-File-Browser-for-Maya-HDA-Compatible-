@@ -172,7 +172,7 @@ if __name__ == "__main__":
 # import Custom_Open_File_Menu
 # reload(Custom_Open_File_Menu)
 
-from Custom_Open_File_Menu import OpenImportDialog
+from Duane_Custom_File_Menu import OpenImportDialog
 
 OpenImportDialog.show_dialog()
 
