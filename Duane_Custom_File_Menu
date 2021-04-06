@@ -152,7 +152,7 @@ class OpenImportDialog(QtWidgets.QDialog):
         mel.eval('houdiniEngine_loadAssetLibrary(\"{}\")'.format(file_path))
         
 
-# PRODUCTION OPEN/CLOSE
+# PRODUCTION OPEN/CLOSE... See @classmethod above
 if __name__ == "__main__":
    
     try:
