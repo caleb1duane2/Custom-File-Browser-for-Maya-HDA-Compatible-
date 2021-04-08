@@ -164,18 +164,3 @@ if __name__ == "__main__":
     open_import_dialog = OpenImportDialog()
     open_import_dialog.show()
     
-# -------------------------------------------------
-# Below is a seperate script that is used to
-# launch this tool in a production environment
-# -------------------------------------------------
-
-# import Custom_Open_File_Menu
-# reload(Custom_Open_File_Menu)
-
-from Duane_Custom_File_Menu import OpenImportDialog
-
-OpenImportDialog.show_dialog()
-
-
-
-
