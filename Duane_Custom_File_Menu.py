@@ -37,12 +37,12 @@ class OpenImportDialog(QtWidgets.QDialog):
         else:
             cls.dlg_instance.raise_()
             cls.dlg_instance.activateWindow()
-    
+            
     def __init__(self, parent=maya_main_window()):
         super(OpenImportDialog, self).__init__(parent)
         
         self.setWindowTitle("Custom Open")
-        self.setMinimumSize(350, 80)
+        self.setMinimumSize(450, 80)
         self.setWindowFlags(self.windowFlags() ^ QtCore.Qt.WindowContextHelpButtonHint) # Get rid of the '?'
         
         self.create_widgets()
@@ -55,8 +55,9 @@ class OpenImportDialog(QtWidgets.QDialog):
         self.select_file_path_btn.setIcon(QtGui.QIcon(":fileOpen.png"))
         self.select_file_path_btn.setToolTip("Select File")
         
-        self.open_rb = QtWidgets.QRadioButton("Open")
-        self.open_rb.setChecked(True)
+        self.newScene_rb = QtWidgets.QRadioButton("New Scene")
+        self.newScene_rb.setChecked(True)
+        self.open_rb = QtWidgets.QRadioButton("Open Scene")
         self.loadHDA_rb = QtWidgets.QRadioButton("HDA Load")
         self.import_rb = QtWidgets.QRadioButton("Import")
         self.reference_rb = QtWidgets.QRadioButton("Reference")
@@ -72,6 +73,7 @@ class OpenImportDialog(QtWidgets.QDialog):
         file_path_layout.addWidget(self.select_file_path_btn)
         
         radio_btn_layout = QtWidgets.QHBoxLayout()
+        radio_btn_layout.addWidget(self.newScene_rb)
         radio_btn_layout.addWidget(self.open_rb)
         radio_btn_layout.addWidget(self.loadHDA_rb)
         radio_btn_layout.addWidget(self.import_rb)
@@ -114,15 +116,17 @@ class OpenImportDialog(QtWidgets.QDialog):
         HDA_FILE02 = ".hdanc"
         
         file_path = self.filepath_le.text()
-        if not file_path:
+        if not file_path and self.newScene_rb.isChecked() == False:
             return
             
         file_info = QtCore.QFileInfo(file_path)
-        if not file_info.exists():
+        if not file_info.exists() and self.newScene_rb.isChecked() == False:
             om.MGlobal.displayError("File does not exist: {0}".format(file_path))
             return
         
-        if self.loadHDA_rb.isChecked():
+        if self.newScene_rb.isChecked():
+            self.new_file()
+        elif self.loadHDA_rb.isChecked():
             self.load_HDA(file_path)
         elif self.open_rb.isChecked():
             self.open_file(file_path)
@@ -130,6 +134,9 @@ class OpenImportDialog(QtWidgets.QDialog):
             self.import_file(file_path)
         else:
             self.reference_file(file_path)
+    
+    def new_file(self):
+        cmds.file(f=True, new=True)
     
     def open_file(self, file_path):
         force = self.force_cb.isChecked()
@@ -152,7 +159,7 @@ class OpenImportDialog(QtWidgets.QDialog):
         mel.eval('houdiniEngine_loadAssetLibrary(\"{}\")'.format(file_path))
         
 
-# PRODUCTION OPEN/CLOSE... See @classmethod above
+# PRODUCTION OPEN/CLOSE
 if __name__ == "__main__":
    
     try:
