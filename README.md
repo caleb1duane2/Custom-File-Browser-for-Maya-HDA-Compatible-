@@ -4,6 +4,7 @@ For more information on the process of developing this tool, check out my artsta
 
 ### STARTUP
 To use this plugin make sure both scripts are in your Maya scripts directory. Example path: C:\Users\Caleb\Documents\maya\2020\scripts
+
 Please ensure both the launch script and the working script are in the same directory so they can communicate.
 
 You then want to setup the launch script as a shelf tool. For help with this process checkout the link below.
