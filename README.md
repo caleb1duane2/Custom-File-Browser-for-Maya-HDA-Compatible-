@@ -1,6 +1,6 @@
 ### INFO
 
-For more information on my process in developing this tool, check out my artstation post: https://www.artstation.com/caleb1duane2
+For more information on the process of developing this tool, check out my artstation post: https://www.artstation.com/caleb1duane2
 
 ### STARTUP
 To use this plugin make sure both scripts are in your Maya scripts directory. Example path: C:\Users\Caleb\Documents\maya\2020\scripts
